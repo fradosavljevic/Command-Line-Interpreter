@@ -1,0 +1,29 @@
+#ifndef CLI_COMMANDDB_H
+#define CLI_COMMANDDB_H
+#include <memory>
+#include <string>
+#include <unordered_map>
+#include <functional>
+
+#include "../Commands/Command.h"
+
+// Klasa CommandDB. Sluzi kao 'baza podataka' svih dostupnih komandi u programu.
+// Cuva pozive funkcija pomocu kojih se pravi konkretna instanca neke komande, kao i njen broj argumenata.
+class CommandDB {
+public:
+    CommandDB();
+
+    // Proverava da li trazena komanda postoji
+    bool exists(const std::string &command);
+
+    // Kreira novu instancu trazene komande i vraca je kao unique_ptr
+    std::unique_ptr<Command> makeCommand(const std::string &command, const std::vector<Token> &args, bool pipe) const;
+
+    int getNumberOfArguments(const std::string &command) const;
+private:
+    std::unordered_map<std::string, std::function<Command*(std::vector<Token>, bool)>> commands;
+    std::unordered_map<std::string, int> numArgs;
+};
+
+
+#endif //CLI_COMMANDDB_H
