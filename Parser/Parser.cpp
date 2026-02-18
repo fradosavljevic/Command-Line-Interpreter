@@ -22,9 +22,12 @@ unique_ptr<Command> Parser::parse(const vector<Token>& tokens) {
             const bool status = commandDB.exists(CMD);
             if (!status) throw runtime_error("Unknown command: " + CMD);
 
-            int numArgs = commandDB.getNumberOfArguments(CMD);
+            const size_t numArgs = commandDB.getNumberOfArguments(CMD);
             vector<Token> args;
             args.resize(numArgs, Token());
+
+            if (subTokens.size() - 1 > numArgs)
+                throw runtime_error("Too many arguments");
 
             for (int i = 1; i < subTokens.size(); i++) { args[i - 1] = subTokens[i]; }
 

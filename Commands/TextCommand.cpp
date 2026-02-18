@@ -4,6 +4,8 @@
 #include "../Reader/FileReader.h"
 #include <iostream>
 
+#include "../Reader/StreamReader.h"
+
 TextCommand::TextCommand(const Token &textSource, const bool pipe) : Command(&std::cin, &std::cout) {
     if (pipe) this->text = "";
     else
@@ -28,5 +30,12 @@ TextCommand::TextCommand(const Token &textSource, const bool pipe) : Command(&st
 }
 
 std::string TextCommand::getText() {
+    return this->text;
+}
+
+std::string TextCommand::inputText(std::istream *stream) {
+    auto* reader = new StreamReader(stream);
+    this->text = reader->readMultiLine();
+    delete reader;
     return this->text;
 }

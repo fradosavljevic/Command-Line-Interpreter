@@ -8,6 +8,9 @@ public:
     Tr(const Token& textSource, const Token& what, const Token& with, bool pipe);
     void execute() override;
     std::string getHandle() override;
+private:
+    std::string what;
+    std::string with;
 };
 
 

@@ -4,6 +4,7 @@
 #include <string>
 #include <unordered_map>
 #include <functional>
+#include <vector>
 
 #include "../Commands/Command.h"
 
@@ -17,12 +18,19 @@ public:
     bool exists(const std::string &command);
 
     // Kreira novu instancu trazene komande i vraca je kao unique_ptr
-    std::unique_ptr<Command> makeCommand(const std::string &command, const std::vector<Token> &args, bool pipe) const;
+    std::unique_ptr<Command> makeCommand(const std::string &command, std::vector<Token> &args, bool pipe) const;
 
-    int getNumberOfArguments(const std::string &command) const;
+    size_t getNumberOfArguments(const std::string &command) const;
 private:
-    std::unordered_map<std::string, std::function<Command*(std::vector<Token>, bool)>> commands;
-    std::unordered_map<std::string, int> numArgs;
+    typedef struct CommandSpecification {
+        std::vector<TokenType> format;
+        std::vector<bool> optional;
+        std::function<Command*(std::vector<Token>, bool)> commands;
+    } CommandSpecification;
+
+    static void checkAndValidate(const CommandSpecification& specification, std::vector<Token> &args);
+
+    std::unordered_map<std::string, CommandSpecification> commands;
 };
 
 

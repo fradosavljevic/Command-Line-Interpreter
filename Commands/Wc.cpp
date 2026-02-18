@@ -4,6 +4,8 @@
 using namespace std;
 
 Wc::Wc(const Token &option, const Token &text, bool pipe) : TextCommand(text, pipe) {
+    if (option.getValue().empty())
+        throw runtime_error("Greska! Nije prosledjena opcija!");
     options.insert(option.getValue());
 }
 

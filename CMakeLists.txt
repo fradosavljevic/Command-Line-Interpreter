@@ -51,4 +51,8 @@ add_executable(CLI main.cpp
         Commands/Tr.cpp
         Commands/Tr.h
         Commands/Batch.cpp
-        Commands/Batch.h)
+        Commands/Batch.h
+        Commands/Head.cpp
+        Commands/Head.h
+        Reader/StreamReader.cpp
+        Reader/StreamReader.h)

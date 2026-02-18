@@ -38,7 +38,7 @@ vector<string> Lexer::split(const std::string& line) {
             current += c;
         }
     }
-    parts.push_back(current);
+    updateParts(parts, current);
     return parts;
 }
 

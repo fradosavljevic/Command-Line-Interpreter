@@ -1,6 +1,7 @@
 #ifndef CLI_COMMAND_H
 #define CLI_COMMAND_H
 #include <set>
+#include <istream>
 #include "../Lexer/Token.h"
 
 /* Apstraktna klasa Command. Roditeljska klasa za sve komande koje postoje u programu.

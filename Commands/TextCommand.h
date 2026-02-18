@@ -9,6 +9,8 @@ public:
 
     // Getter za text
     std::string getText();
+
+    std::string inputText(std::istream* stream);
 private:
     std::string text;
 };
