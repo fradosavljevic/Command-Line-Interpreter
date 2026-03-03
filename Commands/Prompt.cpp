@@ -2,7 +2,7 @@
 #include "../Engine/InterpreterEngine.h"
 using namespace std;
 
-Prompt::Prompt(const Token& Symbol) : SingleArgumentCommand(Symbol) {
+Prompt::Prompt(const Token& symbol) : SingleArgumentCommand(symbol) {
     handle = "prompt";
 }
 

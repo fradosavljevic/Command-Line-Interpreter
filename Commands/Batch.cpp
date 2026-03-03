@@ -5,7 +5,7 @@
 #include <iostream>
 using namespace std;
 
-Batch::Batch(const Token &inputFile) : SingleFileCommand(inputFile) {
+Batch::Batch(const Token &batchFile) : SingleFileCommand(batchFile) {
     handle = "batch";
 }
 

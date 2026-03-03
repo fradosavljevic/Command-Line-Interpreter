@@ -12,8 +12,9 @@ std::string StreamReader::readNewLine() {
 std::string StreamReader::readMultiLine() {
     string text;
     while (getline(*inputStream, line)) {
-        text += line;
+        text += line + "\n";
     }
+    if (!text.empty()) text.pop_back();
     inputStream->clear();
     return text;
 }

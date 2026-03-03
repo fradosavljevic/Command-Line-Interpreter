@@ -5,7 +5,7 @@
 // Komanda truncate otvara postojeci fajl i brise njegov sadrzaj.
 class Truncate : public SingleFileCommand {
 public:
-    explicit Truncate(const Token& filename);
+    explicit Truncate(const Token& fileName);
     void execute() override;
     std::string getHandle() override;
 };

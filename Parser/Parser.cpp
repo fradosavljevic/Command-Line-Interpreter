@@ -32,7 +32,6 @@ unique_ptr<Command> processSubCommand(const vector<Token>& subTokens, CommandDB&
         else clean.push_back(subTokens[i]);
     }
 
-    if (clean.empty()) throw runtime_error("[Parser]: Missing command");
     const string CMD = clean[0].getValue();
 
     if (!db.exists(CMD)) throw runtime_error("[Parser]: Unknown command: " + CMD);

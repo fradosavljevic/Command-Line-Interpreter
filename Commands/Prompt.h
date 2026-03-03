@@ -5,7 +5,7 @@
 // Komanda prompt menja simbol spremnosti u klasi InterpreterEngine.
 class Prompt : public SingleArgumentCommand {
 public:
-    explicit Prompt(const Token& Symbol);
+    explicit Prompt(const Token& symbol);
     void execute() override;
     std::string getHandle() override;
 };

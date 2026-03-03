@@ -5,7 +5,7 @@
 
 class Batch : public SingleFileCommand {
 public:
-    explicit Batch(const Token& inputFile);
+    explicit Batch(const Token& batchFile);
     void execute() override;
     std::string getHandle() override;
 };
