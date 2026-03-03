@@ -17,7 +17,8 @@ string ConsoleReader::readNewLine() {
 string ConsoleReader::readMultiLine() {
     string text;
     while (getline(*inputStream, line)) {
-        text += (line + "\n");
+        if (line != "\n")
+            text += (line + "\n");
     }
     inputStream->clear();
     return text;

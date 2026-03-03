@@ -6,7 +6,7 @@
 
 #include "Command.h"
 
-
+// Klasa Pipe povezuje komande u cevovod i vrsi proveru validnosti datog izraza
 class Pipe : public Command {
 public:
     Pipe(std::vector<std::unique_ptr<Command>> commands);

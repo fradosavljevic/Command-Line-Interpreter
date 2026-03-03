@@ -5,7 +5,7 @@
 //Obezbedjuje tekst komandama koje rade sa tekstom
 class TextCommand : public Command {
 public:
-    explicit TextCommand(const Token& textSource, bool pipe = false);
+    explicit TextCommand(const Token& textSource);
 
     // Getter za text
     std::string getText();
@@ -13,6 +13,7 @@ public:
     std::string inputText(std::istream* stream);
 private:
     std::string text;
+    Token textSource;
 };
 
 

@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-Truncate::Truncate(const Token &filename, bool pipe) : SingleFileCommand(filename, pipe) {
+Truncate::Truncate(const Token &filename) : SingleFileCommand(filename) {
     handle = "truncate";
 }
 

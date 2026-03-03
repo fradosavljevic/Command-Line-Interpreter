@@ -3,6 +3,7 @@
 #include "Reader.h"
 #include <fstream>
 
+// Klasa izvedena od apstraktne klase Reader. Cita sadrzaj fajla koji joj se prosledi.
 class FileReader : public Reader {
 public:
     explicit FileReader(const std::string& path);

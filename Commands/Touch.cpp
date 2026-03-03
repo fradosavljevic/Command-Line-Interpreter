@@ -1,7 +1,7 @@
 #include "Touch.h"
 using namespace std;
 
-Touch::Touch(const Token &filename, bool pipe) : SingleFileCommand(filename, pipe) {}
+Touch::Touch(const Token &filename) : SingleFileCommand(filename) {}
 
 void Touch::execute() {
     string fileName = getFilename();

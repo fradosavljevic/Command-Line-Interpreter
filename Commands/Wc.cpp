@@ -3,7 +3,7 @@
 #include <ostream>
 using namespace std;
 
-Wc::Wc(const Token &option, const Token &text, bool pipe) : TextCommand(text, pipe) {
+Wc::Wc(const Token &option, const Token &text) : TextCommand(text) {
     if (option.getValue().empty())
         throw runtime_error("Greska! Nije prosledjena opcija!");
     options.insert(option.getValue());
@@ -11,15 +11,15 @@ Wc::Wc(const Token &option, const Token &text, bool pipe) : TextCommand(text, pi
 
 void Wc::execute() {
     int counter = 0;
-    string line = getText();
-    if (line.empty()) getline(*inputStream, line);
+    string text = getText();
+    if (text.empty()) getline(*inputStream, text);
     string option = *options.begin();
     if (option == "c") {
-        counter = static_cast<int>(line.length());
+        counter = static_cast<int>(text.length());
     }
     else if (option == "w") {
         bool word = false;
-        for (auto ch : line) {
+        for (auto ch : text) {
             if (std::isspace(ch)) {
                 word = false;
             } else {

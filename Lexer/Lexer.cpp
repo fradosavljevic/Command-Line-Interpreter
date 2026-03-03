@@ -22,17 +22,23 @@ vector<string> Lexer::split(const std::string& line) {
     vector<string> parts;
     string current;
     bool quote = false;
-    for (const char c : line) {
+    for (size_t i = 0; i < line.size(); i++) {
+        char c = line[i];
+
         if (c == '"') {
             current += '"';
             quote = !quote;
         }
-        else if (std::isspace(c) && !quote) {
+        else if ((c == '|' || c == '<' || std::isspace(c)) && !quote) {
             updateParts(parts, current);
-        }  // echo "test" | echo "test"
-        else if (c == '|' && !quote) {
+            if (!std::isspace(c)) parts.emplace_back(1, c);
+        }
+        else if (c == '>' && !quote) {
             updateParts(parts, current);
-            parts.emplace_back("|");
+            if (i + 1 < line.size() && line[i + 1] == '>') {
+                parts.emplace_back(">>"); i++;
+            }
+            else parts.emplace_back(">");
         }
         else {
             current += c;
@@ -55,7 +61,7 @@ vector<Token> Lexer::tokenize(const vector<string>& line) {
     bool nextCommand = false;
 
     for (int i = 1; i < line.size(); i++) {
-        TokenType type = {}; string value;
+        TokenType type = TokenType::NIL; string value = line[i];
 
         if (nextCommand) {
             type = TokenType::COMMAND;
@@ -71,7 +77,7 @@ vector<Token> Lexer::tokenize(const vector<string>& line) {
                 type = TokenType::OPTION;
                 value = line[i].substr(1, line[i].length());
             }
-            else if (endsWith(line[i], ".txt")) {
+            else if (endsWith(line[i], ".txt") || endsWith(line[i], ".out")) {
                 type = TokenType::FILENAME;
                 value = line[i];
             }
@@ -80,10 +86,23 @@ vector<Token> Lexer::tokenize(const vector<string>& line) {
                 value = line[i];
                 nextCommand = true;
             }
+            else if (line[i] == ">") {
+                type = TokenType::REDIRECT_OUTPUT;
+                value = line[i];
+            }
+            else if (line[i] == "<") {
+                type = TokenType::REDIRECT_INPUT;
+                value = line[i];
+            }
+            else if (line[i] == ">>") {
+                type = TokenType::APPEND_OUTPUT;
+                value = line[i];
+            }
         }
 
         tokens.emplace_back(type, value);
     }
-    tokens.emplace_back(TokenType::END_OF_FILE, "EOF");
+
+    tokens.emplace_back(TokenType::END_OF_LINE, "EOL");
     return tokens;
 }

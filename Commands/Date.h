@@ -5,7 +5,7 @@
 // Komanda date prikazuje danasnji datum u formatu dd.mm.yyyy
 class Date : public SimpleCommand {
 public:
-    Date(bool pipe);
+    Date();
     std::string getHandle() override;
     void execute() override;
 };

@@ -2,10 +2,10 @@
 #define CLI_TIME_H
 #include "SimpleCommand.h"
 
-//Komanda time prikazuje trenutno vreme u formatu hh:mm:ss
+// Komanda time prikazuje trenutno vreme u formatu hh:mm:ss
 class Time : public SimpleCommand {
 public:
-    Time(bool pipe);
+    Time();
     void execute() override;
     std::string getHandle() override;
 };

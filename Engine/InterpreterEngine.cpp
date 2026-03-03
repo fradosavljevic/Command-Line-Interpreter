@@ -5,15 +5,23 @@
 #include <string>
 
 InterpreterEngine* InterpreterEngine::instance = nullptr;
-std::stack<std::istream*> InterpreterEngine::inputStream;
+std::stack<std::pair<std::istream*, Context*>> InterpreterEngine::contextStack;
 
-InterpreterEngine::InterpreterEngine() : readySymbol("$"), usingDefaultSource(true), isRunning(true) { inputStream.push(&std::cin); }
+InterpreterEngine::InterpreterEngine() : readySymbol("$"), usingDefaultSource(true), isRunning(true), interactiveMode(true) {
+    contextStack.emplace(&std::cin, new Context());
+}
 
 bool InterpreterEngine::switchContext() {
-    if (inputStream.top()->eof() && !usingDefaultSource) {
-        delete inputStream.top();
-        inputStream.pop();
-        usingDefaultSource = (inputStream.size() == 1);
+    if (contextStack.top().first->eof() && !usingDefaultSource) {
+        std::istream* streamPointer = contextStack.top().first;
+        Context* contextPointer = contextStack.top().second;
+
+        contextStack.pop();
+
+        if (streamPointer != &std::cin) { delete streamPointer; }
+        delete contextPointer;
+
+        usingDefaultSource = interactiveMode = (contextStack.size() == 1);
         return true;
     }
     return false;
@@ -25,15 +33,26 @@ void InterpreterEngine::Start() {
 
         if (switchContext()) continue;
 
-        std::string s; getline(*inputStream.top(), s);
+        std::string s; getline(*contextStack.top().first, s);
+        this->currentlyProcessing = s;
 
         try {
-            if (const std::unique_ptr<Command> cmd = Parser::parse( Lexer::process(s)))
+            if (const std::unique_ptr<Command> cmd = Parser::parse( Lexer::process(s))) {
+                lastExecutedState = cmd->getState();
+                if (!std::get<0>(lastExecutedState)) cmd->setInputStream(contextStack.top().second->inputStream);
+                if (!std::get<1>(lastExecutedState)) cmd->setOutputStream(contextStack.top().second->outputStream);
+
                 cmd->execute();
+
+                cmd->flushOutputStream();
+                if (cmd->wroteToCout()) std::cout << std::endl;
+            }
         }
         catch (const std::exception &e) {
             std::cout << e.what() << std::endl;
         }
+
+        this->currentlyProcessing = "";
     }
 }
 
@@ -48,8 +67,9 @@ void InterpreterEngine::setReadySymbol(const std::string& symbol) {
     this->readySymbol = symbol;
 }
 
-void InterpreterEngine::pushInputStream(std::istream *inStream) {
+void InterpreterEngine::pushNewContext(std::istream *inStream, Context* context) {
     InterpreterEngine* interpreterEngine = getInstance();
     interpreterEngine->usingDefaultSource = false;
-    inputStream.push(inStream);
+    interpreterEngine->interactiveMode = false;
+    contextStack.emplace(inStream, context);
 }

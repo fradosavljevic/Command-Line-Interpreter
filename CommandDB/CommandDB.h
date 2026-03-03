@@ -18,14 +18,14 @@ public:
     bool exists(const std::string &command);
 
     // Kreira novu instancu trazene komande i vraca je kao unique_ptr
-    std::unique_ptr<Command> makeCommand(const std::string &command, std::vector<Token> &args, bool pipe) const;
+    std::unique_ptr<Command> makeCommand(const std::string &command, std::vector<Token> &args) const;
 
     size_t getNumberOfArguments(const std::string &command) const;
 private:
     typedef struct CommandSpecification {
         std::vector<TokenType> format;
         std::vector<bool> optional;
-        std::function<Command*(std::vector<Token>, bool)> commands;
+        std::function<Command*(std::vector<Token>)> commands;
     } CommandSpecification;
 
     static void checkAndValidate(const CommandSpecification& specification, std::vector<Token> &args);

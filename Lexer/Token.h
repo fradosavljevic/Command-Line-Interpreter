@@ -1,8 +1,9 @@
 #ifndef CLI_TOKEN_H
 #define CLI_TOKEN_H
+#include <cstdint>
 #include <string>
 
-enum class TokenType {
+enum class TokenType : std::uint16_t {
     NIL =              0,
     COMMAND =          1 << 1,
     OPTION =           1 << 2,
@@ -11,7 +12,8 @@ enum class TokenType {
     REDIRECT_OUTPUT =  1 << 5,
     FILENAME =         1 << 6,
     PIPE_SEPARATOR =   1 << 7,
-    END_OF_FILE =      1 << 8,
+    END_OF_LINE =      1 << 8,
+    APPEND_OUTPUT =    1 << 9,
     FILE_OR_ARGUMENT = (FILENAME | ARGUMENT),
     OPTION_OR_ARGUMENT = (OPTION | ARGUMENT),
 };

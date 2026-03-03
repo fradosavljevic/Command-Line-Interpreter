@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-Time::Time(bool pipe) {
+Time::Time() {
     handle = "time";
 }
 

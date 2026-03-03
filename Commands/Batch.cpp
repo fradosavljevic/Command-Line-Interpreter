@@ -1,10 +1,11 @@
 #include "Batch.h"
 #include <string>
 #include "../Engine/InterpreterEngine.h"
+#include "../Engine/Context.h"
 #include <iostream>
 using namespace std;
 
-Batch::Batch(const Token &inputFile, bool pipe) : SingleFileCommand(inputFile, pipe) {
+Batch::Batch(const Token &inputFile) : SingleFileCommand(inputFile) {
     handle = "batch";
 }
 
@@ -19,7 +20,7 @@ void Batch::execute() {
             throw runtime_error("Greska pri otvaranju fajla!");
         }
 
-        InterpreterEngine::pushInputStream(ifs);
+        InterpreterEngine::pushNewContext(ifs, new Context(inputStream, outputStream));
     } else {
         throw runtime_error("Greska! Fajl ne postoji!");
     }

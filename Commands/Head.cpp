@@ -2,11 +2,16 @@
 #include <sstream>
 using namespace std;
 
-Head::Head(const Token &nCount, const Token &textSource, const bool pipe) : TextCommand(textSource, pipe) {
+Head::Head(const Token &nCount, const Token &textSource) : TextCommand(textSource) {
     handle = "head";
     if (nCount.getValue()[0] != 'n')
         throw runtime_error("Invalid argument: " + nCount.getValue());
-    lineCount = stoi(nCount.getValue().substr(1));
+    try {
+        lineCount = stoi(nCount.getValue().substr(1));
+    }
+    catch (const std::invalid_argument&) {
+        throw runtime_error("Nije prosledjen broj");
+    }
 }
 
 void Head::execute() {

@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-Rm::Rm(const Token &filename, bool pipe) : SingleFileCommand(filename, pipe) {
+Rm::Rm(const Token &filename) : SingleFileCommand(filename) {
     handle = "rm";
 }
 

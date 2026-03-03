@@ -55,4 +55,6 @@ add_executable(CLI main.cpp
         Commands/Head.cpp
         Commands/Head.h
         Reader/StreamReader.cpp
-        Reader/StreamReader.h)
+        Reader/StreamReader.h
+        Engine/Context.cpp
+        Engine/Context.h)

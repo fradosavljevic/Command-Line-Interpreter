@@ -2,6 +2,7 @@
 #define CLI_CONSOLEREADER_H
 #include "Reader.h"
 
+// Klasa izvedena iz apstraktne klase Reader. Cita sa standardnog ulaza.
 class ConsoleReader : protected Reader {
 public:
     ConsoleReader();

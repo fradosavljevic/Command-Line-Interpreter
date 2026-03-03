@@ -6,8 +6,13 @@
 
 #include "../Reader/StreamReader.h"
 
-TextCommand::TextCommand(const Token &textSource, const bool pipe) : Command(&std::cin, &std::cout) {
-    if (pipe) this->text = "";
+TextCommand::TextCommand(const Token &textSource) : Command(&std::cin, &std::cout) {
+    this->textSource = textSource;
+}
+
+std::string TextCommand::getText() {
+    if (!textSource.getValue().empty() && redirectedInput) throw std::runtime_error("Ne mogu da budu zajedno argument i ulazna redirekcija");
+    if (isInPipe || redirectedInput) this->text = "";
     else
     {
         this->text = textSource.getValue();
@@ -27,9 +32,6 @@ TextCommand::TextCommand(const Token &textSource, const bool pipe) : Command(&st
             throw std::runtime_error("Greska! Nije prepoznat argument");
         }
     }
-}
-
-std::string TextCommand::getText() {
     return this->text;
 }
 

@@ -7,9 +7,8 @@
 // Klasa namenjena za komande koje rade sa samo jednim fajlom.
 class SingleFileCommand : public Command {
 public:
-    explicit SingleFileCommand(const Token& filename, bool pipe);
+    explicit SingleFileCommand(const Token& filename);
 
-    // Getter za filename
     const std::string& getFilename();
 private:
     std::string filename;

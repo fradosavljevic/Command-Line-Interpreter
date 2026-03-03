@@ -2,8 +2,8 @@
 #include <iostream>
 using namespace std;
 
-SingleFileCommand::SingleFileCommand(const Token &filename, bool pipe) : Command(&std::cin, &std::cout) {
-    if (pipe) SingleFileCommand::filename = "";
+SingleFileCommand::SingleFileCommand(const Token &filename) : Command(&std::cin, &std::cout) {
+    if (isInPipe) SingleFileCommand::filename = "";
     else SingleFileCommand::filename = filename.getValue();
 }
 

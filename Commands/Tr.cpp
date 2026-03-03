@@ -6,7 +6,7 @@
 #include "../Reader/StreamReader.h"
 using namespace std;
 
-Tr::Tr(const Token &textSource, const Token &what, const Token &with, bool pipe) : TextCommand(textSource, pipe) {
+Tr::Tr(const Token &textSource, const Token &what, const Token &with) : TextCommand(textSource) {
     handle = "tr";
     this->what = what.getValue();
     if (this->what[0] == '"') this->what = this->what.substr(1, this->what.length() - 2);

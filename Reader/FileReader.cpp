@@ -13,8 +13,9 @@ string FileReader::readNewLine() {
 std::string FileReader::readMultiLine() {
     string text;
     while (getline(*inputStream, line)) {
-        text += (line + "\n");
+        text += (line + '\n');
     }
+    if (!text.empty()) text.pop_back();
     inputStream->clear();
     return text;
 }

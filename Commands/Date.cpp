@@ -4,9 +4,9 @@
 #include <ostream>
 using namespace std;
 
-Date::Date(bool pipe) {
+Date::Date() {
     handle = "date";
-    if (pipe)
+    if (isInPipe)
         throw runtime_error("Komanda date ne sme da bude unutar pipe-a");
 }
 
