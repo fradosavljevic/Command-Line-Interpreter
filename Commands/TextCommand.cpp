@@ -28,9 +28,6 @@ std::string TextCommand::getText() {
             this->text = cr->readMultiLine();
             delete cr;
         }
-        else {
-            throw std::runtime_error("Greska! Nije prepoznat argument");
-        }
     }
     return this->text;
 }

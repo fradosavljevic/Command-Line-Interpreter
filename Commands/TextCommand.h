@@ -2,7 +2,7 @@
 #define CLI_TEXTCOMMAND_H
 #include "Command.h"
 
-//Obezbedjuje tekst komandama koje rade sa tekstom
+// Obezbedjuje tekst komandama koje rade sa tekstom.
 class TextCommand : public Command {
 public:
     explicit TextCommand(const Token& textSource);

@@ -2,6 +2,7 @@
 #define CLI_CONTEXT_H
 #include <istream>
 
+// Sluzi da dostavi neophodne informacije klasi InterpreterEngine prilikom izvrsavanja batch komande.
 class Context {
 public:
     Context() : inputStream(nullptr), outputStream(nullptr) {}

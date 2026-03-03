@@ -73,3 +73,7 @@ void InterpreterEngine::pushNewContext(std::istream *inStream, Context* context)
     interpreterEngine->interactiveMode = false;
     contextStack.emplace(inStream, context);
 }
+
+std::string InterpreterEngine::currentProcessedCommand() {
+    return currentlyProcessing;
+}

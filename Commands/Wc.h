@@ -2,7 +2,7 @@
 #define CLI_WC_H
 #include "TextCommand.h"
 
-// Komanda wc broji koliko karaktera/reci ima u stringu u zavisnosti od prosledjene opcije
+// Komanda wc broji koliko karaktera/reci ima u stringu u zavisnosti od prosledjene opcije.
 class Wc : public TextCommand {
 public:
     explicit Wc(const Token& option, const Token& text);

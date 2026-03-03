@@ -16,6 +16,8 @@ public:
     void setReadySymbol(const std::string& symbol);
 
     static void pushNewContext(std::istream* inStream, Context* context);
+
+    std::string currentProcessedCommand();
 private:
     InterpreterEngine();
     bool switchContext();

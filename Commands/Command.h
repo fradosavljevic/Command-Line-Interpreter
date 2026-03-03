@@ -4,8 +4,8 @@
 #include <istream>
 #include "../Lexer/Token.h"
 
-/* Apstraktna klasa Command. Roditeljska klasa za sve komande koje postoje u programu.
-   Definise obavezan interfejs koju svaka konkretna komanda mora da implementira. */
+// Apstraktna klasa Command. Roditeljska klasa za sve komande koje postoje u programu.
+// Definise obavezan interfejs koju svaka konkretna komanda mora da implementira.
 class Command {
 public:
     virtual ~Command() = default;
@@ -26,7 +26,7 @@ public:
 
     void flushOutputStream() const { if (outputStream) outputStream->flush(); }
 
-    bool wroteToCout() const { return writtenToCout; }
+    [[nodiscard]] bool wroteToCout() const { return writtenToCout; }
 protected:
     std::set<std::string> options;
     std::string handle;

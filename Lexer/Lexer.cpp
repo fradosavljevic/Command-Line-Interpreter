@@ -2,6 +2,8 @@
 #include "Token.h"
 #include <iostream>
 #include <string>
+
+#include "../CustomExceptions/SyntaxError.h"
 using namespace std;
 
 Lexer::Lexer() = default;
@@ -56,6 +58,7 @@ bool endsWith(const std::string& str, const std::string& suffix) {
 vector<Token> Lexer::tokenize(const vector<string>& line) {
     if (line.empty()) return {};
     vector<Token> tokens;
+    vector<string> invalidValues;
     const Token cmdToken(TokenType::COMMAND, line[0]);
     tokens.push_back(cmdToken);
     bool nextCommand = false;
@@ -100,8 +103,12 @@ vector<Token> Lexer::tokenize(const vector<string>& line) {
             }
         }
 
+        if (type == TokenType::NIL && !value.empty()) { invalidValues.push_back(value); }
         tokens.emplace_back(type, value);
     }
+
+    if (!invalidValues.empty())
+        throw SyntaxError(invalidValues);
 
     tokens.emplace_back(TokenType::END_OF_LINE, "EOL");
     return tokens;

@@ -3,7 +3,7 @@
 #include <string>
 #include "TextCommand.h"
 
-//Komanda echo ispisuje prosledjeni tekst na standardni izlaz.
+// Komanda echo ispisuje prosledjeni tekst na standardni izlaz.
 class Echo : public TextCommand {
 public:
     explicit Echo(const Token& textSource);

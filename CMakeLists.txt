@@ -57,4 +57,6 @@ add_executable(CLI main.cpp
         Reader/StreamReader.cpp
         Reader/StreamReader.h
         Engine/Context.cpp
-        Engine/Context.h)
+        Engine/Context.h
+        CustomExceptions/SyntaxError.cpp
+        CustomExceptions/SyntaxError.h)
