@@ -80,7 +80,7 @@ vector<Token> Lexer::tokenize(const vector<string>& line) {
                 type = TokenType::OPTION;
                 value = line[i].substr(1, line[i].length());
             }
-            else if (endsWith(line[i], ".txt") || endsWith(line[i], ".out")) {
+            else if (endsWith(line[i], ".txt") || endsWith(line[i], ".out") || endsWith(line[i], ".cpp")) {
                 type = TokenType::FILENAME;
                 value = line[i];
             }

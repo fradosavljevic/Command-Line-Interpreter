@@ -77,3 +77,19 @@ void InterpreterEngine::pushNewContext(std::istream *inStream, Context* context)
 std::string InterpreterEngine::currentProcessedCommand() {
     return currentlyProcessing;
 }
+
+InterpreterEngine::~InterpreterEngine() {
+    while (!contextStack.empty()) {
+        std::istream* stream = contextStack.top().first;
+        Context* context = contextStack.top().second;
+
+        contextStack.pop();
+
+        if (stream != &std::cin)
+            delete stream;
+
+        delete context;
+    }
+
+    instance = nullptr;
+}

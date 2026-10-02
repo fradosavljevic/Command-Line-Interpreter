@@ -14,7 +14,10 @@ string SyntaxError::processError(const vector<string> &invalidValues) {
         size_t pos = currentlyProcessing.find(val, currentSearchPos);
 
         if (pos != string::npos) {
-            pointers[pos] = '^';
+            for (size_t i = 0; i < val.length(); ++i) {
+                pointers[pos + i] = '^';
+            }
+
             currentSearchPos = pos + val.length();
         }
     }

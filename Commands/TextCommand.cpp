@@ -16,25 +16,20 @@ std::string TextCommand::getText() {
     else
     {
         this->text = textSource.getValue();
-        if (textSource.getType() == TokenType::ARGUMENT)
-            this->text = textSource.getValue();
-        else if (textSource.getType() == TokenType::FILENAME) {
-            auto *fr = new FileReader(textSource.getValue());
-            this->text = fr->readMultiLine();
-            delete fr;
+        if (textSource.getType() == TokenType::FILENAME) {
+            FileReader fr(textSource.getValue());
+            this->text = fr.readMultiLine();
         }
         else if (textSource.getType() == TokenType::NIL && textSource.getValue().empty()) {
-            auto *cr = new ConsoleReader();
-            this->text = cr->readMultiLine();
-            delete cr;
+            ConsoleReader cr;
+            this->text = cr.readMultiLine();
         }
     }
     return this->text;
 }
 
 std::string TextCommand::inputText(std::istream *stream) {
-    auto* reader = new StreamReader(stream);
-    this->text = reader->readMultiLine();
-    delete reader;
+    StreamReader reader(stream);
+    this->text = reader.readMultiLine();
     return this->text;
 }

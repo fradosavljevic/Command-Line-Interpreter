@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ostream>
 
+#include "../CustomExceptions/SyntaxError.h"
 #include "../Reader/StreamReader.h"
 using namespace std;
 

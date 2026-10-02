@@ -6,7 +6,7 @@
 // Komanda echo ispisuje prosledjeni tekst na standardni izlaz.
 class Echo : public TextCommand {
 public:
-    explicit Echo(const Token& textSource);
+    explicit Echo(const Token& option, const Token& textSource);
     void execute() override;
     std::string getHandle() override;
 };

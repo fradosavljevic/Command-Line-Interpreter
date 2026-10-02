@@ -20,6 +20,7 @@ public:
     std::string currentProcessedCommand();
 private:
     InterpreterEngine();
+    ~InterpreterEngine();
     bool switchContext();
     static InterpreterEngine* instance;
     static std::stack<std::pair<std::istream*, Context*>> contextStack;

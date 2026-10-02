@@ -30,13 +30,13 @@ CommandDB::CommandDB() {
         [](const vector<Token>& args) { return new Touch(args[0]); }
     };
     commands["echo"] = {
-        {TokenType::FILE_OR_ARGUMENT},
-        {true},
-        [](const vector<Token>& args) { return new Echo(args[0]); }
+        {TokenType::OPTION, TokenType::FILE_OR_ARGUMENT},
+        {true, true},
+        [](const vector<Token>& args) { return new Echo(args[0], args[1]); }
     };
     commands["wc"] = {
         {TokenType::OPTION, TokenType::FILE_OR_ARGUMENT},
-        {true, true},
+        {false, true},
         [](const vector<Token>& args) { return new Wc(args[0], args[1]); }
     };
     commands["prompt"] = {
@@ -89,11 +89,12 @@ void CommandDB::checkAndValidate(const CommandSpecification& specification, std:
 
         if (!match) {
             if (specification.optional[i]) {
-                if (ptr < args.size() && args[ptr].getType() == TokenType::NIL) {
+                /*if (ptr < args.size() && args[ptr].getType() == TokenType::NIL) {
                     validArguments.push_back(args[ptr++]);
                 } else {
                     validArguments.emplace_back(TokenType::NIL, "");
-                }
+                }*/
+                validArguments.emplace_back(TokenType::NIL, "");
             } else {
                 throw runtime_error("Greska! Nije prosledjen obavezan argument ili je tip pogresan.");
             }
