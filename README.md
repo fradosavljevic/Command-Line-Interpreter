@@ -28,7 +28,7 @@ executes commands using a context-based execution model.
 The interpreter is organized into several main components:
 
 <p align="center">
-  <img src="./assets/pipeline.png" width="420" alt="Opis slike">
+  <img src="./Assets/pipeline.png" width="420" alt="">
 </p>
 
 ## Supported Commands
