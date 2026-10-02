@@ -25,10 +25,10 @@ executes commands using a context-based execution model.
 
 ## Architecture
 
-The interpreter is organized into several main components:
+The interpreter is structured around a lexer/parser pipeline:
 
 <p align="center">
-  <img src="./Assets/pipeline.png" width="420" alt="">
+  <img src="./Assets/pipeline.png" width="420" alt="Interpreter Architecture">
 </p>
 
 ## Supported Commands
