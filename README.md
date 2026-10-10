@@ -1,5 +1,8 @@
 # CLI Interpreter
 
+[![language](https://img.shields.io/badge/language-C%2B%2B17%20%2B%20assembly-blue)](https://github.com/)
+[![license](https://img.shields.io/badge/license-MIT-green)](https://github.com/)
+
 A C++ command-line interpreter supporting command parsing, I/O redirection,
 pipelines, and batch execution.
 
